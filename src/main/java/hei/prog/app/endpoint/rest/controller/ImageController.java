@@ -17,11 +17,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class ImageController {
 
-    private final ImageService imageService;
+  private final ImageService imageService;
 
-    @PostMapping
-    public ResponseEntity<ImageResponseDto> save(@RequestBody @Valid ImageRequestDto imageRequestDto) {
-        ImageResponseDto imageResponseDto = imageService.save(imageRequestDto);
-        return new ResponseEntity<>(imageResponseDto, HttpStatus.CREATED);
-    }
+  @PostMapping
+  public ResponseEntity<ImageResponseDto> save(
+      @RequestBody @Valid ImageRequestDto imageRequestDto) {
+    ImageResponseDto imageResponseDto = imageService.save(imageRequestDto);
+    return new ResponseEntity<>(imageResponseDto, HttpStatus.CREATED);
+  }
 }
