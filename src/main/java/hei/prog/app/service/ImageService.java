@@ -28,11 +28,7 @@ public class ImageService {
 
   public ImageResponseDto save(String fileName, String email, MultipartFile file) {
     Image image =
-        Image.builder()
-            .fileName(fileName)
-            .email(email)
-            .createdAt(LocalDateTime.now())
-            .build();
+        Image.builder().fileName(fileName).email(email).createdAt(LocalDateTime.now()).build();
 
     JImage jImage = imageMapper.toEntity(image);
     JImage saved = imageRepository.save(jImage);
@@ -45,7 +41,8 @@ public class ImageService {
   @Async
   public void asyncUploadToS3(MultipartFile file, String fileName) {
     try {
-      InputStream grayscaleStream = imageProcessingService.convertToGrayscale(file.getInputStream());
+      InputStream grayscaleStream =
+          imageProcessingService.convertToGrayscale(file.getInputStream());
       String s3Key = "grayscale/" + UUID.randomUUID() + "_" + fileName;
       s3Service.upload(s3Key, grayscaleStream, "image/png");
     } catch (IOException e) {

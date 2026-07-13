@@ -25,7 +25,8 @@ public class ImageController {
   public ResponseEntity<ImageResponseDto> save(
       @RequestParam("file") MultipartFile file,
       @NotBlank(message = "fileName is required") @RequestParam("fileName") String fileName,
-      @NotBlank(message = "email is required") @Email(message = "email must be valid")
+      @NotBlank(message = "email is required")
+          @Email(message = "email must be valid")
           @RequestParam("email")
           String email) {
     ImageResponseDto imageResponseDto = imageService.save(fileName, email, file);
